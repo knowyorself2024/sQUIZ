@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Self-Discovery Quiz</title>
+<meta name="description" content="A private self-exploration quiz. For fun and self-discovery only.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app">
+
+  <section id="welcome" class="screen active">
+    <div class="card">
+      <h1>Self-Discovery Quiz</h1>
+      <p class="tag">A private, playful test of your preferences.</p>
+      <p class="lead">Answer honestly — one question at a time. You can move forward, back, or submit at any point. At the end, you'll see your personal profile.</p>
+      <ul class="meta">
+        <li><strong id="totalCount">200</strong> questions</li>
+        <li>~10 minutes</li>
+        <li>Anonymous</li>
+      </ul>
+      <p class="disclaimer">For adults only (18+). For fun and self-exploration. Stay safe, sane, and consensual.</p>
+      <button id="startBtn" class="btn primary">Start the quiz</button>
+    </div>
+  </section>
+
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="progress"><div id="bar" class="bar"></div></div>
+      <div class="progress-text">
+        Question <span id="qNum">1</span> of <span id="qTotal">200</span>
+        · <span id="answered">0</span> answered
+      </div>
+      <h2 id="qText" class="question">…</h2>
+      <div id="options" class="options"></div>
+      <div class="nav">
+        <button id="prevBtn" class="btn ghost">← Previous</button>
+        <button id="nextBtn" class="btn primary">Next →</button>
+        <button id="submitBtn" class="btn submit">Submit</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="result" class="screen">
+    <div class="card">
+      <div id="resultLoading">
+        <div class="spinner"></div>
+        <p>Analyzing your answers…</p>
+      </div>
+      <div id="resultContent" style="display:none;">
+        <p class="eyebrow">Your Profile</p>
+        <h1 id="resultTitle">—</h1>
+        <p id="resultDesc" class="lead">—</p>
+        <div class="score-box">
+          <div><span class="score-num" id="scoreAvg">0</span><span class="score-lbl">Intensity</span></div>
+          <div><span class="score-num" id="scoreAnswered">0</span><span class="score-lbl">Answered</span></div>
+        </div>
+        <h3>Your top themes</h3>
+        <ul id="topCategories" class="cats"></ul>
+        <button id="restartBtn" class="btn primary" style="margin-top:16px">Take it again</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Questions source: edit these to change the quiz. Hidden from view. -->
+  <ol id="questions" hidden aria-hidden="true">
+    <li>How do you feel about being tied up with soft rope?</li>
+    <li>How do you feel about using handcuffs during intimacy?</li>
+    <li>How do you feel about being restrained to a bed?</li>
+    <li>How do you feel about wearing a blindfold while restrained?</li>
+    <li>How do you feel about temperature play with ice?</li>
+    <li>How do you feel about light spanking?</li>
+    <li>How do you feel about being spanked harder?</li>
+    <li>How do you feel about temperature play with warm wax?</li>
+    <li>How do you feel about light scratching?</li>
+    <li>How do you feel about using a Wartenberg wheel?</li>
+    <li>How do you feel about electrostimulation (light)?</li>
+    <li>How do you feel about sensory deprivation?</li>
+    <li>How do you feel about taking a submissive role?</li>
+    <li>How do you feel about taking a dominant role?</li>
+    <li>How do you feel about switching between roles?</li>
+    <li>How do you feel about following instructions from a partner?</li>
+    <li>How do you feel about slow, sensual foreplay?</li>
+    <li>How do you feel about extended kissing sessions?</li>
+    <li>How do you feel about being watched by a trusted partner?</li>
+    <li>How do you feel about orgasm denial?</li>
+    <li>How do you feel about orgasm control (edging)?</li>
+    <li>How do you feel about being told when you may finish?</li>
+    <li>How do you feel about watching a partner?</li>
+    <li>How do you feel about eye contact during intimacy?</li>
+    <li>How do you feel about primal play (chase and catch)?</li>
+    <li>How do you feel about growling, biting, wrestling energy?</li>
+    <li>How do you feel about playing a character during intimacy?</li>
+    <li>How do you feel about acting out a scripted scenario?</li>
+    <li>How do you feel about receiving compliments in the moment?</li>
+    <li>How do you feel about using leather cuffs?</li>
+    <li>How do you feel about being tied in intricate rope patterns (shibari)?</li>
+    <li>How do you feel about restraining a partner?</li>
+    <li>How do you feel about giving compliments in the moment?</li>
+    <li>How do you feel about giving instructions to a partner?</li>
+    <li>How do you feel about dirty talk?</li>
+    <li>How do you feel about whispered affection?</li>
+    <li>How do you feel about long massages before intimacy?</li>
+    <li>How do you feel about using a paddle?</li>
+    <li>How do you feel about candlelight and ambience?</li>
+    <li>How do you feel about planning a full evening in advance?</li>
+    <li>How do you feel about leather clothing on a partner?</li>
+    <li>How do you feel about latex or rubber outfits?</li>
+    <li>How do you feel about lace and fine lingerie?</li>
+    <li>How do you feel about silk fabrics?</li>
+    <li>How do you feel about denim?</li>
+    <li>How do you feel about corsets?</li>
+    <li>How do you feel about high heels?</li>
+    <li>How do you feel about boots?</li>
+    <li>How do you feel about stockings and garters?</li>
+    <li>How do you feel about gloves?</li>
+    <li>How do you feel about spontaneous intimacy?</li>
+    <li>How do you feel about morning intimacy?</li>
+    <li>How do you feel about listening to music/soundscapes during intimacy?</li>
+    <li>How do you feel about aromatherapy or scent play?</li>
+    <li>How do you feel about flogging?</li>
+    <li>How do you feel about caning?</li>
+    <li>How do you feel about late-night intimacy?</li>
+    <li>How do you feel about afternoon intimacy?</li>
+    <li>How do you feel about showering together?</li>
+    <li>How do you feel about bathing together?</li>
+    <li>How do you feel about cuddling afterward for a long time?</li>
+    <li>How do you feel about talking about the experience afterward?</li>
+    <li>How do you feel about keeping a private journal of preferences?</li>
+    <li>How do you feel about reading about intimacy and relationships?</li>
+    <li>How do you feel about makeup as part of a look?</li>
+    <li>How do you feel about wigs or hair play?</li>
+    <li>How do you feel about temporary body paint?</li>
+    <li>How do you feel about uniforms?</li>
+    <li>How do you feel about trying something new every few months?</li>
+    <li>How do you feel about sticking to what works?</li>
+    <li>How do you feel about collars as accessories?</li>
+    <li>How do you feel about prioritizing emotional connection first?</li>
+    <li>How do you feel about prioritizing physical chemistry first?</li>
+    <li>How do you feel about clear verbal consent conversations?</li>
+    <li>How do you feel about using a safeword system?</li>
+    <li>How do you feel about negotiating a scene in advance?</li>
+    <li>How do you feel about aftercare rituals?</li>
+    <li>How do you feel about checking in mid-experience?</li>
+    <li>How do you feel about debriefing the next day?</li>
+    <li>How do you feel about keeping intimacy playful and light?</li>
+    <li>How do you feel about keeping intimacy serious and intense?</li>
+    <li>How do you feel about laughing during intimacy?</li>
+    <li>How do you feel about silence during intimacy?</li>
+    <li>How do you feel about having a shared playlist?</li>
+    <li>How do you feel about sending flirty texts through the day?</li>
+    <li>How do you feel about hand-written notes?</li>
+    <li>How do you feel about small physical gifts?</li>
+    <li>How do you feel about surprise date nights?</li>
+    <li>How do you feel about sharing food sensually?</li>
+    <li>How do you feel about threesomes?</li>
+    <li>How do you feel about group scenarios (4+)?</li>
+    <li>How do you feel about feeding each other?</li>
+    <li>How do you feel about slow dancing at home?</li>
+    <li>How do you feel about reading to each other?</li>
+    <li>How do you feel about shared fantasies journal?</li>
+    <li>How do you feel about trying a class together?</li>
+    <li>How do you feel about traveling together for intimacy?</li>
+    <li>How do you feel about hotel nights?</li>
+    <li>How do you feel about outdoor settings (private)?</li>
+    <li>How do you feel about keeping specific outfits for special nights?</li>
+    <li>How do you feel about matching outfits?</li>
+    <li>How do you feel about one partner picking out the other's clothes?</li>
+    <li>How do you feel about video-calling a partner intimately?</li>
+    <li>How do you feel about sharing photos privately?</li>
+    <li>How do you feel about reading erotica together?</li>
+    <li>How do you feel about watching adult films together?</li>
+    <li>How do you feel about letting a partner style your hair?</li>
+    <li>How do you feel about having your photo taken (private)?</li>
+    <li>How do you feel about framing a memento of a special night?</li>
+    <li>How do you feel about creating a shared 'yes/no/maybe' list?</li>
+    <li>How do you feel about reviewing the list every few months?</li>
+    <li>How do you feel about leaving room for evolving desires?</li>
+    <li>How do you feel about keeping some fantasies private?</li>
+    <li>How do you feel about keeping most fantasies shared?</li>
+    <li>How do you feel about trying a partner's fantasy first?</li>
+    <li>How do you feel about leading with your own fantasy first?</li>
+    <li>How do you feel about alternating who leads?</li>
+    <li>How do you feel about spending a whole evening on one thing?</li>
+    <li>How do you feel about quick moments of connection?</li>
+    <li>How do you feel about dressing up in themed outfits?</li>
+    <li>How do you feel about stranger roleplay?</li>
+    <li>How do you feel about boss/employee roleplay?</li>
+    <li>How do you feel about teacher/student roleplay (adults)?</li>
+    <li>How do you feel about doctor/patient roleplay?</li>
+    <li>How do you feel about long-term power exchange dynamics?</li>
+    <li>How do you feel about royalty/servant roleplay?</li>
+    <li>How do you feel about captor/captive fantasy?</li>
+    <li>How do you feel about hero/villain roleplay?</li>
+    <li>How do you feel about period-costume roleplay?</li>
+    <li>How do you feel about sci-fi or fantasy character roleplay?</li>
+    <li>How do you feel about monster/creature fantasy?</li>
+    <li>How do you feel about vampire fantasy?</li>
+    <li>How do you feel about detective/suspect roleplay?</li>
+    <li>How do you feel about predator/prey dynamics?</li>
+    <li>How do you feel about playful pinning?</li>
+    <li>How do you feel about raw, instinct-driven intimacy?</li>
+    <li>How do you feel about quiet, whispered intimacy?</li>
+    <li>How do you feel about using titles like Sir/Ma'am/Miss?</li>
+    <li>How do you feel about protocol-based interactions?</li>
+    <li>How do you feel about a 24/7 dynamic?</li>
+    <li>How do you feel about being slapped on the thighs?</li>
+    <li>How do you feel about receiving marks that last a day or two?</li>
+    <li>How do you feel about public teasing (fully clothed)?</li>
+    <li>How do you feel about semi-public settings (safe, discreet)?</li>
+    <li>How do you feel about attending a play party?</li>
+    <li>How do you feel about swinging with a partner?</li>
+    <li>How do you feel about open or polyamorous relationships?</li>
+    <li>How do you feel about sending audio messages?</li>
+    <li>How do you feel about narrating a fantasy aloud?</li>
+    <li>How do you feel about cross-dressing for play?</li>
+    <li>How do you feel about gender play or gender-bending?</li>
+    <li>How do you feel about age-gap fantasies (adults)?</li>
+    <li>How do you feel about size-difference fantasies?</li>
+    <li>How do you feel about body-worship focus?</li>
+    <li>How do you feel about louder, more expressive intimacy?</li>
+    <li>How do you feel about keeping the lights on?</li>
+    <li>How do you feel about controlled, negotiated pain play?</li>
+    <li>How do you feel about chastity play (short-term)?</li>
+    <li>How do you feel about chastity play (long-term)?</li>
+    <li>How do you feel about task and reward dynamics?</li>
+    <li>How do you feel about feather or fur textures on the skin?</li>
+    <li>How do you feel about guided sensory experiences?</li>
+    <li>How do you feel about impact play as part of a scene?</li>
+    <li>How do you feel about breath awareness play?</li>
+    <li>How do you feel about being suspended partially off the ground?</li>
+    <li>How do you feel about keeping the lights low?</li>
+    <li>How do you feel about using a mirror in the room?</li>
+    <li>How do you feel about recording nothing, remembering everything?</li>
+    <li>How do you feel about clear boundaries around technology?</li>
+    <li>How do you feel about screen-free intimate time?</li>
+    <li>How do you feel about using a shared calendar for date nights?</li>
+    <li>How do you feel about annual intimacy 'reset' conversation?</li>
+    <li>How do you feel about having a partner control your schedule for a night?</li>
+    <li>How do you feel about being asked to wait for permission?</li>
+    <li>How do you feel about learning a new technique together?</li>
+    <li>How do you feel about reading a couples' book together?</li>
+    <li>How do you feel about muscle appreciation?</li>
+    <li>How do you feel about sensual grooming rituals?</li>
+    <li>How do you feel about attending a workshop (online)?</li>
+    <li>How do you feel about attending a workshop (in person)?</li>
+    <li>How do you feel about edge play that flirts with limits?</li>
+    <li>How do you feel about seeing a couples' counselor proactively?</li>
+    <li>How do you feel about knife play (safe/dull)?</li>
+    <li>How do you feel about needle play (professionally done)?</li>
+    <li>How do you feel about individual reflection on your desires?</li>
+    <li>How do you feel about meditation or breathwork before intimacy?</li>
+    <li>How do you feel about yoga or stretching before intimacy?</li>
+    <li>How do you feel about exercising together?</li>
+    <li>How do you feel about cooking a slow meal before a date night?</li>
+    <li>How do you feel about sharing a drink before intimacy?</li>
+    <li>How do you feel about keeping intimacy fully sober?</li>
+    <li>How do you feel about long, unhurried undressing?</li>
+    <li>How do you feel about transformation-themed roleplay?</li>
+    <li>How do you feel about mirror play (watching yourselves)?</li>
+    <li>How do you feel about posing for a partner?</li>
+    <li>How do you feel about keeping some clothing on?</li>
+    <li>How do you feel about a partner narrating what they're doing?</li>
+    <li>How do you feel about wearing a full-body harness?</li>
+    <li>How do you feel about being immobilized for an extended time?</li>
+    <li>How do you feel about guided breathing together?</li>
+  </ol>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
